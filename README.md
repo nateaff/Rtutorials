@@ -1,3 +1,5 @@
 # Introduction to R
 
-Created for a short series of classes taught at San Francisco State.
+Short tutorials created for classes taught at San Francisco State.
+
+The pages [version is here](https://nwaff.github.io/Rtutorials)
