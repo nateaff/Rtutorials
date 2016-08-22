@@ -337,7 +337,7 @@ Steps:
 1. Create a vector that represents the roles of a single die
 2. Use the `sample()` function to make three vectors that simulate 10, 100 and 1000 rolls of the die.
 3. Compare the mean of each simulation to the analytic mean
-4. Plot them next to each other using the `barplot()` function.
+4. Plot them next to each other using the `hist()` function.
 
 
 ```
@@ -351,13 +351,13 @@ Read function docs or follow examples to enable repeated sampling.
 
 ### Plotting
 
-Base plot with one vector will use the index as the _x_ value:
+Base plot with one vector will use the index as the _x_ value and create a simple scatter plot
 ```
 plot(sample1)
 
 ```
 
-We can use `barplot()` to plot the three simulations. The `par` variable holds some graphic parameters for plotting in base R (the default plotting functions). We can create multiple plots by changing the `mfrom` setting. 
+We can use `hist()` to plot the three simulations. The `par` variable holds some graphic parameters for plotting in base R (the default plotting functions). We can create multiple plots by changing the `mfrom` setting. 
 
 
 ```
@@ -365,9 +365,9 @@ We can use `barplot()` to plot the three simulations. The `par` variable holds s
   oldpar <- par  
   # set number of rows, columns with mfrow
   par(mfrow = c(1,3))
-  barplot(sample1)
-  barplot(sample1)
-  barplot(sample1)
+  hist(sample1)
+  hist(sample1)
+  hist(sample1)
   # restore defaults
   par <- oldpar
 

@@ -1260,7 +1260,7 @@ You can access elements by name or by brackets. You need to use a double bracket
 <li>Create a vector that represents the roles of a single die</li>
 <li>Use the <code>sample()</code> function to make three vectors that simulate 10, 100 and 1000 rolls of the die.</li>
 <li>Compare the mean of each simulation to the analytic mean</li>
-<li>Plot them next to each other using the <code>barplot()</code> function.</li>
+<li>Plot them next to each other using the <code>hist()</code> function.</li>
 </ol>
 <pre><code>  seed(1)
   die &lt;- 1:6
@@ -1270,18 +1270,18 @@ You can access elements by name or by brackets. You need to use a double bracket
 
 <p>Read function docs or follow examples to enable repeated sampling. </p>
 <h3 id="plotting"><a name="user-content-plotting" href="#plotting" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plotting</h3>
-<p>Base plot with one vector will use the index as the <em>x</em> value:<br />
+<p>Base plot with one vector will use the index as the <em>x</em> value and create a simple scatter plot<br />
 <pre><code>plot(sample1)
 
 </code></pre></p>
-<p>We can use <code>barplot()</code> to plot the three simulations. The <code>par</code> variable holds some graphic parameters for plotting in base R (the default plotting functions). We can create multiple plots by changing the <code>mfrom</code> setting. </p>
+<p>We can use <code>hist()</code> to plot the three simulations. The <code>par</code> variable holds some graphic parameters for plotting in base R (the default plotting functions). We can create multiple plots by changing the <code>mfrom</code> setting. </p>
 <pre><code>  # save defaults
   oldpar &lt;- par  
   # set number of rows, columns with mfrow
   par(mfrow = c(1,3))
-  barplot(sample1)
-  barplot(sample1)
-  barplot(sample1)
+  hist(sample1)
+  hist(sample1)
+  hist(sample1)
   # restore defaults
   par &lt;- oldpar
 
