@@ -45,6 +45,14 @@ Most data types in `R` can be though of has
 
 For more on data types try Hadley Wickham's [Advanced R](https://adv-R.had.co.nz). (Many of the examples and notes below are taken from this book.)
 
+## Where did your `R` session start
+ 
+```
+getwd()
+?setwd()
+dir()
+```
+
 ## `R` as a calculator
 
 Here are some basic arithemetic operations in `R`. 
@@ -85,10 +93,11 @@ A fast way to look up help for a function in the R console. Type a question mark
   ?sum
 ```
 
+
+
 The arithmetic operators are also function, and you can look up the documentation for them by putting the operator in quotes.
 ```
   ?"%%"
-
 ```
 
 
@@ -199,16 +208,36 @@ If you know how many elements will be added to a vector you can preallocate spac
 ### Factors
 
 Factors are the other most commonly used class of objects in R.
-In addition the mode and length, factors have a levels attribute which records the unique values of the factor. All types of vectors can be coerced to factor vectors. 
+In addition the mode and length, factors have a levels attribute which records the unique values of the factor. All types of vectors can be coerced to factor vectors. By default,  
 
-**Coercion** means altering the type of the vector. The common syntax for chaning types in `R` is `as.atomictype`. For example: `as.double`, `as.character`, etc.
+**Coercion** means altering the type of the vector. The common syntax for changing types in `R` is `as.atomictype`. For example: `as.double`, `as.character`, etc.
 
 
 ```
   # create factors from characters
   factor_vec <- factor(c("a", "b", "c"))
   levels(factor_vec)
+
+  # coerce a character vector to a factor
+  name_vec <- c("Sue", "Saghi", "Eileen", "Fred", "Fred", "Sue")
+
+  # show unique names: 
+  unique(name_vec)
+  (name_factors <- as.factor(name_vec))
+
+  #access levels
+  levels(name_factors)
+  levels(name_factors)[2]
+
+  # a common way to create a factor vector
+  rep(c("Sue", "Saghi", "Eileen"), 3)
+  rep(c("Sue", "Saghi", "Eileen"), each = 3)
+
+  # combining the operations
+  factor(rep(c("Sue", "Saghi", "Eileen"), 3))
+
 ```
+
 ### stringsAsFactors
 
 One of the common ways of loading data in R, the `read.table` and `read.csv` functions, has a default setting that coerces all characters columns as factors, the infamous `stringsAsFactors == TRUE` setting. We'll return to this later but it's something to watch out for. 
@@ -233,6 +262,22 @@ _NA, Inf, NaN, NULL_.
   sum(na_vec[1:4])
 
 ```
+Operations with `NA`'s will return `NA`.
+
+```
+  1 + NA 
+  2* NA
+
+
+  2 + Inf
+  2/Inf 
+  Inf - Inf
+
+  is.null(NULL)
+
+```
+
+
 
 ### Subset an atomic vector
 
@@ -326,9 +371,89 @@ You can access elements by name or by brackets. You need to use a double bracket
 
 ```
 
+## Matrices 
+
+When creating a matrix you need to specify the number of columns and rows.
+
+```
+  matrix(c(1, 2, 3, 4))
+  matrix(1:4, nrow = 2, ncol = 2)
+
+```
+**Exercise**
+Find the argument to the matrix funciton that will build the matrix so (1 2) is the first row.
+
+
+```
+  M <- matrix(rnorm(16), ncol= 4, ncol = 4, byrow = TRUE)
+
+# Operations
+  M %*% M
+  M*M
+  M^2
+  solve(M)
+
+  dim(M)
+
+  # access an element
+  M[1,2]
+  # access a row
+  M[,1]
+```
+
+**Quirk** 
+
+Retrieving a column of a matrix returns a vector, not a matrix.
+```
+  is.matrix(M[,1])
+  is.vector(M[,1])
+```
+
+## Data frames 
+
+A data frame can be thought of as a list of named vectors (the columns) all of the same length. We'll go over using data frames more in later tutorials so here I'm just introducing a few basic operations. 
+
+```
+  # some vectors of the same length
+  abc <- LETTERS[1:3]
+  nums <- rpois(3, 10)
+  facs <- c("red", "green", "blue")
+
+  # create a data frame
+  df <- data.frame(abc, nums, facs)
+
+  # add a column 
+  df$ints <-  3:5
+
+  # summaries of data 
+  summary(df)
+  head(df)
+  names(df)
+
+  #replace names
+  names(df) <- c("letters", "numbers", "factors", "integers")
+  df
+  row.names(df)
+
+  # subsetting
+  df[1,2]
+
+  df[1]
+  is.vector(df[1])
+  is.vector(df[[1]])
+
+  is.list(df)
+  is.data.frame(df)
+  mean(df[,2])
+  sum(df[,2])
+
+  # add a column 
+  df$ints <-  3:5
+```
+
 *** 
 
-# Simulation exercise
+# Simulation exercise : Die tosses
 
 In this exercise we use what you've learned so far to simulate 10, 100 and 1000 roles of a die
 
@@ -340,7 +465,7 @@ Steps:
 4. Plot them next to each other using the `hist()` function.
 
 
-```
+```x
   seed(1)
   die <- 1:6
   # this does not work
@@ -349,9 +474,12 @@ Steps:
 
 Read function docs or follow examples to enable repeated sampling. 
 
+This is a simple way of generating estimates for a given event. For example, you compute the probability of 
+
 ### Plotting
 
 Base plot with one vector will use the index as the _x_ value and create a simple scatter plot
+
 ```
 plot(sample1)
 
@@ -372,4 +500,46 @@ We can use `hist()` to plot the three simulations. The `par` variable holds some
   par <- oldpar
 
 ```
+
+# Exercise 2 : Mixture of Gaussians and ggplot2
+
+Here we create a simple mixture of gaussians and plot 
+
+```
+  n1 <- rnorm(10000, mean = 3, sd = 1.5)
+  n2 <- rnorm(10000, mean = -4, sd = 2)
+  n3 <- rnorm(10000, mean = 2, sd = 5)
+
+  hist(c(n1,n2,n3), col = "gray30", border = "white")
+
+  p1 <- hist(n1)
+  p2 <- hist(n2)
+  p3 <- hist(n3)
+
+  d1 <- density(rnorm(10000, mean = 3, sd = 1.5))
+  d2 <- density(rnorm(10000, mean = -4, sd = 2))
+  d3 <- density(rnorm(10000, mean = 2, sd = 5))
+
+  plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = "",
+  main = "Mixture of Gaussians" )
+  plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = "", add=TRUE) 
+  plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab ="", add=TRUE)  
+
+  # a simple plot function
+
+  add_density <- function(dens, color){
+    par(new = TRUE)
+    plot(dens, col = color, xlim = c(-20, 20), ylab ="", xlab="",main="", yaxt = "n", xaxt= "n")  
+  }
+
+  add_density(d1, "blue")
+  add_density(d2, "red")
+  add_density(d3, "green")
+
+
+```
+
+
+
+
 

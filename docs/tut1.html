@@ -1158,11 +1158,30 @@ What does the &ldquo;%/%&rdquo; operator do? Use the help or experiment. </p>
 
 <h3 id="factors"><a name="user-content-factors" href="#factors" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Factors</h3>
 <p>Factors are the other most commonly used class of objects in R.<br />
-In addition the mode and length, factors have a levels attribute which records the unique values of the factor. All types of vectors can be coerced to factor vectors. </p>
-<p><strong>Coercion</strong> means altering the type of the vector. The common syntax for chaning types in <code>R</code> is <code>as.atomictype</code>. For example: <code>as.double</code>, <code>as.character</code>, etc.</p>
+In addition the mode and length, factors have a levels attribute which records the unique values of the factor. All types of vectors can be coerced to factor vectors. By default,  </p>
+<p><strong>Coercion</strong> means altering the type of the vector. The common syntax for changing types in <code>R</code> is <code>as.atomictype</code>. For example: <code>as.double</code>, <code>as.character</code>, etc.</p>
 <pre><code>  # create factors from characters
   factor_vec &lt;- factor(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
   levels(factor_vec)
+
+  # coerce a character vector to a factor
+  name_vec &lt;- c(&quot;Sue&quot;, &quot;Saghi&quot;, &quot;Eileen&quot;, &quot;Fred&quot;, &quot;Fred&quot;, &quot;Sue&quot;)
+
+  # show unique names: 
+  unique(name_vec)
+  (name_factors &lt;- as.factor(name_vec))
+
+  #access levels
+  levels(name_factors)
+  levels(name_factors)[2]
+
+  # a common way to create a factor vector
+  rep(c(&quot;Sue&quot;, &quot;Saghi&quot;, &quot;Eileen&quot;), 3)
+  rep(c(&quot;Sue&quot;, &quot;Saghi&quot;, &quot;Eileen&quot;), each = 3)
+
+  # combining the operations
+  factor(rep(c(&quot;Sue&quot;, &quot;Saghi&quot;, &quot;Eileen&quot;), 3))
+
 </code></pre>
 
 <h3 id="stringsasfactors"><a name="user-content-stringsasfactors" href="#stringsasfactors" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>stringsAsFactors</h3>
@@ -1171,7 +1190,7 @@ In addition the mode and length, factors have a levels attribute which records t
 <p>Several special values in R are worth kowing: <br />
 <em>NA, Inf, NaN, NULL</em>. </p>
 <p><code>NA</code> is R&rsquo;s type for missing values. Some built-in functions handle <code>NA</code>s silently but most arithemtic functions are undefined on <code>NA</code>s</p>
-<pre><code>  na_vec &lt;- c(1,2,3,4, NA)
+<p><pre><code>  na_vec &lt;- c(1,2,3,4, NA)
   is.na(na_vec)
 
   sum(na_vec)
@@ -1180,6 +1199,18 @@ In addition the mode and length, factors have a levels attribute which records t
 
   # sum a subset
   sum(na_vec[1:4])
+
+</code></pre><br />
+Operations with <code>NA</code>&lsquo;s will return <code>NA</code>.</p>
+<pre><code>1 + NA 
+2* NA
+
+
+2 + Inf
+2/Inf 
+Inf - Inf
+
+is.null(NULL)
 
 </code></pre>
 
@@ -1252,23 +1283,97 @@ You can access elements by name or by brackets. You need to use a double bracket
 
 </code></pre>
 
-<hr />
-<h1 id="simulation-exercise"><a name="user-content-simulation-exercise" href="#simulation-exercise" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Simulation exercise</h1>
-<p>In this exercise we use what you&rsquo;ve learned so far to simulate 10, 100 and 1000 roles of a die</p>
-<p>Steps:</p>
-<ol>
-<li>Create a vector that represents the roles of a single die</li>
-<li>Use the <code>sample()</code> function to make three vectors that simulate 10, 100 and 1000 rolls of the die.</li>
-<li>Compare the mean of each simulation to the analytic mean</li>
-<li>Plot them next to each other using the <code>hist()</code> function.</li>
-</ol>
-<pre><code>  seed(1)
+<h2 id="matrices"><a name="user-content-matrices" href="#matrices" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Matrices</h2>
+<p>When creating a matrix you need to specify the number of columns and rows.</p>
+<p><pre><code>matrix(c(1, 2, 3, 4))
+matrix(1:4, nrow = 2, ncol = 2)
+
+
+</code></pre><br />
+<strong>Exercise</strong><br />
+Find the argument to the matrix funciton that will build the matrix so (1 2) is the first row.</p>
+<pre><code>M &lt;- matrix(rnorm(16), ncol= 4, ncol = 4, byrow = TRUE)
+
+# Operations
+M %*% M
+M*M
+M^2
+solve(M)
+
+dim(M)
+
+# access an element
+M[1,2]
+# access a row
+M[,1]
+</code></pre>
+
+<p><strong>Quirk</strong> </p>
+<p>Retrieving a column of a matrix returns a vector, not a matrix.<br />
+<pre><code>is.matrix(M[,1])
+
+</code></pre></p>
+<h2 id="data-frames"><a name="user-content-data-frames" href="#data-frames" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Data frames</h2>
+<p>A data frame can be thought of as a list of named vectors (the columns) all of the same length. We&rsquo;ll go over using data frames more in later tutorials so here I&rsquo;m just introducing a few basic operations. </p>
+<pre><code># some vectors of the same length
+abc &lt;- LETTERS[1:3]
+nums &lt;- rpois(3, 10)
+facs &lt;- c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+
+# create a data frame
+df &lt;- data.frame(abc, nums, facs)
+
+# add a column 
+df$ints &lt;-  3:5
+
+# summaries of data 
+summary(df)
+head(df)
+names(df)
+
+#replace names
+names(df) &lt;- c(&quot;letters&quot;, &quot;numbers&quot;, &quot;factors&quot;, &quot;integers&quot;)
+df
+row.names(df)
+
+# subsetting
+df[1,2]
+
+df[1]
+is.vector(df[1])
+is.vector(df[[1]])
+
+is.list(df)
+is.data.frame(df)
+mean(df[,2])
+sum(df[,2])
+
+# add a column 
+df$ints &lt;-  3:5
+
+*** 
+
+# Simulation exercise : Die tosses
+
+In this exercise we use what you've learned so far to simulate 10, 100 and 1000 roles of a die
+
+Steps:
+
+1. Create a vector that represents the roles of a single die
+2. Use the `sample()` function to make three vectors that simulate 10, 100 and 1000 rolls of the die.
+3. Compare the mean of each simulation to the analytic mean
+4. Plot them next to each other using the `hist()` function.
+
+
+```x
+  seed(1)
   die &lt;- 1:6
   # this does not work
   sample1 &lt;- sample(die, 10)
 </code></pre>
 
 <p>Read function docs or follow examples to enable repeated sampling. </p>
+<p>This is a simple way of generating estimates for a given event. For example, you compute the probability of </p>
 <h3 id="plotting"><a name="user-content-plotting" href="#plotting" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plotting</h3>
 <p>Base plot with one vector will use the index as the <em>x</em> value and create a simple scatter plot<br />
 <pre><code>plot(sample1)
@@ -1284,5 +1389,40 @@ You can access elements by name or by brackets. You need to use a double bracket
   hist(sample1)
   # restore defaults
   par &lt;- oldpar
+
+</code></pre>
+
+<h1 id="exercise-2-mixture-of-gaussians-and-ggplot2"><a name="user-content-exercise-2-mixture-of-gaussians-and-ggplot2" href="#exercise-2-mixture-of-gaussians-and-ggplot2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Exercise 2 : Mixture of Gaussians and ggplot2</h1>
+<p>Here we create a simple mixture of gaussians and plot </p>
+<pre><code>n1 &lt;- rnorm(10000, mean = 3, sd = 1.5)
+n2 &lt;- rnorm(10000, mean = -4, sd = 2)
+n3 &lt;- rnorm(10000, mean = 2, sd = 5)
+
+hist(c(n1,n2,n3), col = &quot;gray30&quot;, border = &quot;white&quot;)
+
+p1 &lt;- hist(n1)
+p2 &lt;- hist(n2)
+p3 &lt;- hist(n3)
+
+d1 &lt;- density(rnorm(10000, mean = 3, sd = 1.5))
+d2 &lt;- density(rnorm(10000, mean = -4, sd = 2))
+d3 &lt;- density(rnorm(10000, mean = 2, sd = 5))
+
+plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = &quot;&quot;,
+main = &quot;Mixture of Gaussians&quot; )
+plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = &quot;&quot;, add=TRUE) 
+plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab =&quot;&quot;, add=TRUE)  
+
+# a simple plot function
+
+add_density &lt;- function(dens, color){
+  par(new = TRUE)
+  plot(dens, col = color, xlim = c(-20, 20), ylab =&quot;&quot;, xlab=&quot;&quot;,main=&quot;&quot;, yaxt = &quot;n&quot;, xaxt= &quot;n&quot;)  
+}
+
+add_density(d1, &quot;blue&quot;)
+add_density(d2, &quot;red&quot;)
+add_density(d3, &quot;green&quot;)
+
 
 </code></pre></article></body></html>
