@@ -41,11 +41,13 @@ add2(2,3)
 # example 1
 x = 5
 
+(x==4)
+
 
 if(x == 4) {
-  cat("its a four")
+  cat("its a four", "\n")
 } else {
-  cat("its not a four")
+  cat("its not a four", "\n")
 }
 
 
@@ -96,6 +98,7 @@ for(k in 1:10){
   cat( paste("iteration:", k, sep = " "), "\n")
 }
 
+
 k = 1
 while(k <= 1024){
   cat( paste("product:", k, sep = " "), "\n")
@@ -113,7 +116,6 @@ cat("k: ", k, "\n")
 for(k in seq_along(xx)){
 cat("k: ", k, "\n")
 }
-
 
 xx <- 3:20
 length(xx)
@@ -313,4 +315,8 @@ pow4(3)
 pows <- lapply(5:10, make_pow)
 # pass the functions to the anonymous function to evaluate
 lapply(pows, function(x) x(2:4))
+
+
+
+
 

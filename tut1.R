@@ -218,7 +218,6 @@ matrix(c(1, 2, 3, 4))
 matrix(1:4, nrow = 2, ncol = 2)
 matrix(1:4, nrow = 2, ncol = 2, byrow = TRUE)
 
-
 M <- matrix(rnorm(16), ncol= 4, nrow = 4, byrow = TRUE)
 M
 # Operations
