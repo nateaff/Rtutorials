@@ -96,6 +96,8 @@ head(flights)
 # mutate() 
 # summarise()
 
+
+
 # January flights
 filter(flights, month == 1)
 filter(flights, month == 1 | month == 2)
@@ -106,10 +108,7 @@ arrange(flights, year, month, day)
 arrange(flights, dep_delay)
 group_by(flights, carrier)
 
-mutate(flights, speed = distance/air_time * 60)
-
-summarise(group_by(flights, carrier), 
-          arr_delay = mean(arr_delay))
+flights2 <- mutate(flights, speed = distance/air_time * 60)
 
 
 summarise(group_by(flights, carrier), 
@@ -120,11 +119,13 @@ summarise(group_by(flights, carrier),
 # plotting data
 
 by_tailnum <- group_by(flights, tailnum)
+
 delay <- summarise(by_tailnum,
   count = n(),
   dist = mean(distance, na.rm = TRUE),
   arr_delay = mean(arr_delay, na.rm = TRUE))
 delay <- filter(delay, count > 20, dist < 2000)
+
 
 with(delay, plot(dist, arr_delay, pch = 16, 
     cex = 0.5 + 5*count/max(count),  
