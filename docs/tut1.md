@@ -2,13 +2,13 @@
 
 # Introduction to R: Basic data types and operations
 
-This tutorial covers the basic data types and structures in R along with an introduction to common functions and operators. This should be suitable to someone just starting out in R but I try to go into a little more detail than the common introductory tutorial. 
+This tutorial covers the basic data types and structures in R along with an introduction to common functions and operators. This should be suitable to someone just starting out in R but I'll be going into a little more detail of how `R` works than a basic introduction. 
 
 For this tutorial you'll need R installed. During the class I won't be going over installation of R or Rstudio but I've included some notes below on installing and using Rstudio for reference.
 
 ## Installing R and Rstudio
 
- I would also recommend using Rstudio as your programming environment or IDE (integrated development environment). 
+ I recommend using Rstudio as your programming environment or IDE (integrated development environment). Here's some links for getting installing and getting started with R.
 
 1. Install R : [Berkeley CRAN mirror](http://cran.cnr.berkeley.edu/) 
 2. Install Rstudio following the instructions [here](https://www.rstudio.com/products/rstudio/download2/).
@@ -23,7 +23,7 @@ To begin with we will mostly be using the editor (top left panel) and the consol
 
 Under *Tools*->*Global Options* unselect the options: "Always save history", and "Restore .RData into workplace at startup". 
 
-These settings will let you start a new R session without data and variables saved from a previoussession loaded into the global environment. 
+These settings will let you start a new R session without data and variables saved from a previous session loaded into the global environment. 
 
 *Useful shortcuts*
 
@@ -32,26 +32,21 @@ These settings will let you start a new R session without data and variables sav
 
 *Saving your session*
 
-I'd recommend using the editor for running most commands. Particularly when starting, saving commands from a session is a useful way to review what you've learned. 
+You can enter commands directly in the command line. This is great for testing out what functions do or for simple calculations. However, once you know how a function or a piece of code works, if you want to preserve that code you should be using the editor. Particularly when starting, saving commands from a session is a useful way to review what you've learned. 
 
-*** 
+In Rstudio you can also execute code from the editor by `ctrl - Enter`.
 
-# Basic data types 
-
-Most data types in `R` can be though of has
-
-1. Vectors or arrays of a single data type
-2. Lists which contain multiple data types
-
-For more on data types try Hadley Wickham's [Advanced R](https://adv-R.had.co.nz). (Many of the examples and notes below are taken from this book.)
+# Basic operations in `R`
+ 
 
 ## Where did your `R` session start
  
 ```
-getwd()
-?setwd()
-dir()
+  getwd()
+  ?setwd()
+  dir()
 ```
+
 
 ## `R` as a calculator
 
@@ -93,8 +88,6 @@ A fast way to look up help for a function in the R console. Type a question mark
   ?sum
 ```
 
-
-
 The arithmetic operators are also function, and you can look up the documentation for them by putting the operator in quotes.
 ```
   ?"%%"
@@ -109,6 +102,14 @@ What does the "%/%" operator do? Use the help or experiment.
 The help documentation can be found using the console (which is fast), using the help panel in Rstudio, and is also online. Googling specific questions can also lead to good answers. [http://stackoverflow.com] has a large group of users and you can find some questions answered by expert users. 
 
 
+# Basic data types 
+
+Most data types in `R` can be thought of as either
+
+1. Vectors or arrays of a single data type,
+2. Lists which contain multiple data types.
+
+For more on data types try Hadley Wickham's [Advanced R](https://adv-R.had.co.nz). (Many of the examples and notes below are taken from this book.)
 
 ## Primitive types
 
@@ -276,8 +277,6 @@ Operations with `NA`'s will return `NA`.
   is.null(NULL)
 
 ```
-
-
 
 ### Subset an atomic vector
 
@@ -520,10 +519,12 @@ Here we create a simple mixture of gaussians and plot
   d2 <- density(rnorm(10000, mean = -4, sd = 2))
   d3 <- density(rnorm(10000, mean = 2, sd = 5))
 
-  plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = "",
-  main = "Mixture of Gaussians" )
-  plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = "", add=TRUE) 
-  plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab ="", add=TRUE)  
+  plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = "", 
+        main = "Mixture of Gaussians" )
+  plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = "", 
+        add=TRUE) 
+  plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab ="", 
+        add=TRUE)  
 
   # a simple plot function
 
