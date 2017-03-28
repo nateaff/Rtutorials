@@ -254,7 +254,7 @@ In the next example, these operations are combined. We group data by the plane t
       cex = 0.5 + 5*count/max(count),  
       col = rgb(.1,.1,.1,0.4) ))
   lines(with(delay, loess.smooth(dist, arr_delay)), 
-    col = "blue", lwd = 3, lty = 3)
+      col = "blue", lwd = 3, lty = 3)
 
 ```
 

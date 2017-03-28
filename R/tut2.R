@@ -11,7 +11,7 @@ TRUE <- FALSE
 # }
 
 # example 1
-echo <- function(arg ){ 
+echo <- function(arg) { 
   cat(arg, "\n")
 }
 
@@ -19,7 +19,7 @@ echo("arrrrrrrg")
 
 
 # example 2 
-add <- function(a,b){
+add <- function(a, b) {
   cat("a: ", a, ", b:" b, "\n")
   a + b  
 }
@@ -203,8 +203,6 @@ apply(df, 1, mean, trim = 0.1)
 M <- as.matrix(df)
 apply(M, 2, sd)
 
-#apply(X, MARGIN, FUN, ...)
-
 # tapply
 
 # tapply example
@@ -315,8 +313,3 @@ pow4(3)
 pows <- lapply(5:10, make_pow)
 # pass the functions to the anonymous function to evaluate
 lapply(pows, function(x) x(2:4))
-
-
-
-
-

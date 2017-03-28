@@ -53,16 +53,16 @@ TRUE == FALSE   # logical
 
 ## Vectors
 
-x <- 4.4@
+x <- 4.4
 is.vector(x)
 
 # double
-(vec <- c(0,1,2,3,4))
-vec <- c(0,1,2); vec
+(vec <- c(0, 1, 2, 3, 4))
+vec <- c(0, 1, 2); vec
 
 length(vec)
 mode(vec)
-is.numeric(vec)s
+is.numeric(vec)
 is.double(vec)
 
 # generate seqeunce
@@ -84,7 +84,7 @@ bool_vec <- c(TRUE, FALSE, TRUE, FALSE)
 is.logical(bool_vec)
 
 # concatenation
-vec2 <- c(1,2,3, int_vec)
+vec2 <- c(1, 2, 3, int_vec)
 
 # create a vectors of length 10 with default values
 character(10)
@@ -100,7 +100,7 @@ x <- vector("double", 10)
 ## Factors
 
 # create factors from characters
-factor_vec <- factor(c("a", "b",c "c"))
+factor_vec <- factor(c("a", "b", "c"))
 levels(factor_vec)
 
 # coerce a character vector to a factor
@@ -123,9 +123,8 @@ factor(rep(c("Sue", "Saghi", "Eileen"), 3))
 
 
 
-### Special values 
-
-na_vec <- c(1,2,3,4, NA)
+# Special values 
+na_vec <- c(1, 2, 3, 4, NA)
 is.na(na_vec)
 
 sum(na_vec)
@@ -139,11 +138,10 @@ sum(na_vec[1:4])
 ## Operations with `NA`'s will return `NA`.
 
 1 + NA 
-2* NA
-
+2 * NA
 
 2 + Inf
-2/Inf 
+2 / Inf 
 Inf - Inf
 
 is.null(NULL)
@@ -157,14 +155,14 @@ abcs[1:2]
 # omit the third element
 abcs[-3]
 # select based on a vector
-abcs[c(1,3,5)]
+abcs[c(1, 3, 5)]
 
 ## logical vector subsetting
 
 # set a seed for reproducible random number generation
 set.seed(1)
 
-numbers <- rnorm(10, mean=0, sd =10)
+numbers <- rnorm(10, mean = 0, sd = 10)
 # returns logical vector
 numbers > 10
 # using the logical vector to subset
@@ -173,8 +171,6 @@ numbers[numbers > 10]
 names(numbers)
 names(numbers) <- letters[1:length(numbers)]
 numbers["a"]
-
-
 
 # A few examples of useful functions:
 
@@ -211,7 +207,7 @@ is.vector(vec1)
 
 
 
-#--- Matrices 
+# Matrices 
 
 matrix(c(1, 2, 3, 4))
 
@@ -223,24 +219,24 @@ M
 # Operations
 M %*% M
 
-M*M
-M^2
+M * M
+M ^ 2
 
 solve(M)
 
 dim(M)
 
 # access an element
-M[1,2]
+M[1, 2]
 
 # access a row
-M[,1]
+M[, 1]
 
 
 # Retrieving a column of a matrix returns a vector, not a matrix.
 
-is.matrix(M[,1])
-is.vector(M[,1])
+is.matrix(M[, 1])
+is.vector(M[, 1])
 
 
 
@@ -275,8 +271,8 @@ is.vector(df[[1]])
 
 is.list(df)
 is.data.frame(df)
-mean(df[,2])
-sum(df[,2])
+mean(df[, 2])
+sum(df[, 2])
 
 # add a column 
 df$ints <-  3:5
@@ -295,9 +291,10 @@ plot(sample1)
 
 
 # save defaults
-oldpar <- par  
+oldpar <- par 
+
 # set number of rows, columns with mfrow
-par(mfrow = c(1,3))
+par(mfrow = c(1, 3))
 
 hist(rolls)
 hist(sample1)
@@ -305,14 +302,11 @@ hist(sample1)
 # restore defaults
 par <- oldpar
 
-
-
-
 n1 <- rnorm(10000, mean = 3, sd = 1.5)
 n2 <- rnorm(10000, mean = -4, sd = 2)
 n3 <- rnorm(10000, mean = 2, sd = 5)
 
-hist(c(n1,n2,n3), col = "gray30", border = "white")
+hist(c(n1, n2, n3), col = "gray30", border = "white")
 
 p1 <- hist(n1)
 p2 <- hist(n2)
