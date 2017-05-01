@@ -16,7 +16,9 @@ dir()
 # assignment
 x <- 13*2
 y <- 5
-x + y
+# or 
+z = x + y
+z 
 
 (x <- 15 )
 # modulus

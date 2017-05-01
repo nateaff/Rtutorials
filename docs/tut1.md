@@ -58,12 +58,12 @@ Here are some basic arithemetic operations in `R`.
   4^2
 ```
 
-You can assign values to a variable in two ways
-
+You can assign values to a variable in two ways, either with the `<-`or `=` symbols. 
 ```
   x <- 13*2
   y <- 5
-  x + y
+  z = x + y
+  z
 ```
 The value of the computation is not displayed if when assigned to a 
 variable. You can display it by using parentheses:
