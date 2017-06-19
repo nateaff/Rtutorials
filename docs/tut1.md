@@ -25,28 +25,30 @@ Under *Tools*->*Global Options* unselect the options: "Always save history", and
 
 These settings will let you start a new R session without data and variables saved from a previous session loaded into the global environment. 
 
-*Useful shortcuts*
+**Useful shortcuts**
 
 * Ctrl + Enter : (in editor) run highlighted lines in console
 * Ctrl + uparrow : (in editor) See previous commands run in console
 
-*Saving your session*
+**Saving your session**
 
-You can enter commands directly in the command line. This is great for testing out what functions do or for simple calculations. However, once you know how a function or a piece of code works, if you want to preserve that code you should be using the editor. Particularly when starting, saving commands from a session is a useful way to review what you've learned. 
+You can enter commands directly in the console pane in the lower left corner. This is great for testing out what functions do or for simple calculations. However, once you know how a function or a piece of code works, if you want to preserve that code you should be using the editor. Particularly when starting out, having a record of a session is a useful way to review what you've learned. 
 
-In Rstudio you can also execute code from the editor by `ctrl - Enter`.
+In Rstudio you can execute code from the editor by using `ctrl - Enter` which will execute the line your cursor or whatever code is highlighted.
 
 # Basic operations in `R`
  
 
 ## Where did your `R` session start
- 
+
+These commands check what directory `R` considers your current location. 
+
 ```
   getwd()
   ?setwd()
   dir()
 ```
-
+The question mark before a command let's you see the command documentation. In Rstudio, you can also search for help in the lower right hand panel.
 
 ## `R` as a calculator
 
@@ -65,8 +67,7 @@ You can assign values to a variable in two ways, either with the `<-`or `=` symb
   z = x + y
   z
 ```
-The value of the computation is not displayed if when assigned to a 
-variable. You can display it by using parentheses:
+The value of the computation is not displayed when being assigned to another variable. You can display it by using parentheses:
 
 ```
   (x <- 15 )
@@ -280,7 +281,7 @@ Operations with `NA`'s will return `NA`.
 
 ### Subset an atomic vector
 
-In the last example we used brackets to access a subset of the vector, elements (1,2,3,4). In R, vector indexing begins with 1, and elements can be accessed using the bracket operator "[]". 
+In the last example we used brackets to access a subset of the vector, elements (1,2,3,4). In R, vector indexing begins with 1, and elements can be accessed using the bracket operator "[". 
 
 
 ```
@@ -294,7 +295,7 @@ In the last example we used brackets to access a subset of the vector, elements 
   abcs[c(1,3,5)]
 
 ```
-A very common way of subsetting vectors is through logical vectors based on some condition. 
+A very common way of subsetting vectors by using logical vectors based on some condition. 
 
 ```
   # set a seed for reproducible random number generation
@@ -303,11 +304,13 @@ A very common way of subsetting vectors is through logical vectors based on some
   numbers <- rnorm(10, mean=0, sd =10)
   # returns logical vector
   numbers > 10
-  # using the logical vector to subset
-numbers[numbers > 10]
-```
 
-Less commonly used, you can also assign names to a vector
+  # using the logical vector to subset
+  numbers[numbers > 10]
+```
+In the last command, all indices for which the condition 'number > 10' is true will be selected.
+
+You can also assign names to a vector.
 ```
   names(numbers)
   names(numbers) <- letters[1:length(numbers)]
@@ -315,8 +318,8 @@ Less commonly used, you can also assign names to a vector
 ```
 
 ### Exercise 
-Find the letters of the `numbers` vectors corresponding to positions that are less than -10.  
 
+Find the letters of the `numbers` vectors corresponding to positions that are less than -10.  
 
 
 ## Operations on vectors

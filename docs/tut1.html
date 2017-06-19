@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
-  width: 45em;
+  max-width: 980px;
   border: 1px solid #ddd;
   outline: 1300px solid #fff;
   margin: 16px auto;
@@ -7,7 +7,7 @@
 
 body .markdown-body
 {
-  padding: 30px;
+  padding: 45px;
 }
 
 @font-face {
@@ -1015,10 +1015,10 @@ body .markdown-body
   }
 }
 </style><title>tut1</title></head><body><article class="markdown-body"><h1 id="introduction-to-r-basic-data-types-and-operations"><a name="user-content-introduction-to-r-basic-data-types-and-operations" href="#introduction-to-r-basic-data-types-and-operations" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Introduction to R: Basic data types and operations</h1>
-<p>This tutorial covers the basic data types and structures in R along with an introduction to common functions and operators. This should be suitable to someone just starting out in R but I try to go into a little more detail than the common introductory tutorial. </p>
+<p>This tutorial covers the basic data types and structures in R along with an introduction to common functions and operators. This should be suitable to someone just starting out in R but I&rsquo;ll be going into a little more detail of how <code>R</code> works than a basic introduction. </p>
 <p>For this tutorial you&rsquo;ll need R installed. During the class I won&rsquo;t be going over installation of R or Rstudio but I&rsquo;ve included some notes below on installing and using Rstudio for reference.</p>
 <h2 id="installing-r-and-rstudio"><a name="user-content-installing-r-and-rstudio" href="#installing-r-and-rstudio" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Installing R and Rstudio</h2>
-<p>I would also recommend using Rstudio as your programming environment or IDE (integrated development environment). </p>
+<p>I recommend using Rstudio as your programming environment or IDE (integrated development environment). Here&rsquo;s some links for getting installing and getting started with R.</p>
 <ol>
 <li>Install R : <a href="http://cran.cnr.berkeley.edu/">Berkeley CRAN mirror</a> </li>
 <li>Install Rstudio following the instructions <a href="https://www.rstudio.com/products/rstudio/download2/">here</a>.</li>
@@ -1028,22 +1028,23 @@ body .markdown-body
 <p>To begin with we will mostly be using the editor (top left panel) and the console, which is below the editor. </p>
 <h3 id="some-recommended-rstudio-settings"><a name="user-content-some-recommended-rstudio-settings" href="#some-recommended-rstudio-settings" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Some recommended Rstudio settings:</h3>
 <p>Under <em>Tools</em>-&gt;<em>Global Options</em> unselect the options: &ldquo;Always save history&rdquo;, and &ldquo;Restore .RData into workplace at startup&rdquo;. </p>
-<p>These settings will let you start a new R session without data and variables saved from a previoussession loaded into the global environment. </p>
-<p><em>Useful shortcuts</em></p>
+<p>These settings will let you start a new R session without data and variables saved from a previous session loaded into the global environment. </p>
+<p><strong>Useful shortcuts</strong></p>
 <ul>
 <li>Ctrl + Enter : (in editor) run highlighted lines in console</li>
 <li>Ctrl + uparrow : (in editor) See previous commands run in console</li>
 </ul>
-<p><em>Saving your session</em></p>
-<p>I&rsquo;d recommend using the editor for running most commands. Particularly when starting, saving commands from a session is a useful way to review what you&rsquo;ve learned. </p>
-<hr />
-<h1 id="basic-data-types"><a name="user-content-basic-data-types" href="#basic-data-types" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Basic data types</h1>
-<p>Most data types in <code>R</code> can be though of has</p>
-<ol>
-<li>Vectors or arrays of a single data type</li>
-<li>Lists which contain multiple data types</li>
-</ol>
-<p>For more on data types try Hadley Wickham&rsquo;s <a href="https://adv-R.had.co.nz">Advanced R</a>. (Many of the examples and notes below are taken from this book.)</p>
+<p><strong>Saving your session</strong></p>
+<p>You can enter commands directly in the console pane in the lower left corner. This is great for testing out what functions do or for simple calculations. However, once you know how a function or a piece of code works, if you want to preserve that code you should be using the editor. Particularly when starting out, having a record of a session is a useful way to review what you&rsquo;ve learned. </p>
+<p>In Rstudio you can execute code from the editor by using <code>ctrl - Enter</code> which will execute the line your cursor or whatever code is highlighted.</p>
+<h1 id="basic-operations-in-r"><a name="user-content-basic-operations-in-r" href="#basic-operations-in-r" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Basic operations in <code>R</code></h1>
+<h2 id="where-did-your-r-session-start"><a name="user-content-where-did-your-r-session-start" href="#where-did-your-r-session-start" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Where did your <code>R</code> session start</h2>
+<p>These commands check what directory <code>R</code> considers your current location. </p>
+<p><pre><code>  getwd()
+  ?setwd()
+  dir()
+</code></pre><br />
+The question mark before a command let&rsquo;s you see the command documentation. In Rstudio, you can also search for help in the lower right hand panel.</p>
 <h2 id="r-as-a-calculator"><code>R</code> as a calculator</h2>
 <p>Here are some basic arithemetic operations in <code>R</code>. </p>
 <pre><code>  5 + 12
@@ -1051,13 +1052,13 @@ body .markdown-body
   4^2
 </code></pre>
 
-<p>You can assign values to a variable in two ways</p>
-<p><pre><code>  x &lt;- 13*2
+<p>You can assign values to a variable in two ways, either with the <code>&lt;-</code>or <code>=</code> symbols. <br />
+<pre><code>  x &lt;- 13*2
   y &lt;- 5
-  x + y
+  z = x + y
+  z
 </code></pre><br />
-The value of the computation is not displayed if when assigned to a <br />
-variable. You can display it by using parentheses:</p>
+The value of the computation is not displayed when being assigned to another variable. You can display it by using parentheses:</p>
 <pre><code>  (x &lt;- 15 )
   ( y &lt;- 20 %% 3)
 </code></pre>
@@ -1074,12 +1075,18 @@ variable. You can display it by using parentheses:</p>
 
 <p>The arithmetic operators are also function, and you can look up the documentation for them by putting the operator in quotes.<br />
 <pre><code>  ?&quot;%%&quot;
-
 </code></pre></p>
 <p><strong>Exercise</strong><br />
 What does the &ldquo;%/%&rdquo; operator do? Use the help or experiment. </p>
 <h2 id="getting-help-part-2"><a name="user-content-getting-help-part-2" href="#getting-help-part-2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Getting help part 2</h2>
 <p>The help documentation can be found using the console (which is fast), using the help panel in Rstudio, and is also online. Googling specific questions can also lead to good answers. [<a href="http://stackoverflow.com">http://stackoverflow.com</a>] has a large group of users and you can find some questions answered by expert users. </p>
+<h1 id="basic-data-types"><a name="user-content-basic-data-types" href="#basic-data-types" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Basic data types</h1>
+<p>Most data types in <code>R</code> can be thought of as either</p>
+<ol>
+<li>Vectors or arrays of a single data type,</li>
+<li>Lists which contain multiple data types.</li>
+</ol>
+<p>For more on data types try Hadley Wickham&rsquo;s <a href="https://adv-R.had.co.nz">Advanced R</a>. (Many of the examples and notes below are taken from this book.)</p>
 <h2 id="primitive-types"><a name="user-content-primitive-types" href="#primitive-types" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Primitive types</h2>
 <p>A vector is an array or ordered sequence of elements. In R, vectors are ordered arrays that contain a single type. </p>
 <p>There are five <em>atomic</em> types in R. Many operations on vectors of atomic types are implemented in C(a fast, lower level programming language). </p>
@@ -1202,20 +1209,20 @@ In addition the mode and length, factors have a levels attribute which records t
 
 </code></pre><br />
 Operations with <code>NA</code>&lsquo;s will return <code>NA</code>.</p>
-<pre><code>1 + NA 
-2* NA
+<pre><code>  1 + NA 
+  2* NA
 
 
-2 + Inf
-2/Inf 
-Inf - Inf
+  2 + Inf
+  2/Inf 
+  Inf - Inf
 
-is.null(NULL)
+  is.null(NULL)
 
 </code></pre>
 
 <h3 id="subset-an-atomic-vector"><a name="user-content-subset-an-atomic-vector" href="#subset-an-atomic-vector" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Subset an atomic vector</h3>
-<p>In the last example we used brackets to access a subset of the vector, elements (1,2,3,4). In R, vector indexing begins with 1, and elements can be accessed using the bracket operator &ldquo;[]&rdquo;. </p>
+<p>In the last example we used brackets to access a subset of the vector, elements (1,2,3,4). In R, vector indexing begins with 1, and elements can be accessed using the bracket operator &ldquo;[&ldquo;. </p>
 <p><pre><code>  # letters is a built-in R variable
   letters[1:20]
   abcs &lt;- Letters[1:5]
@@ -1226,18 +1233,19 @@ is.null(NULL)
   abcs[c(1,3,5)]
 
 </code></pre><br />
-A very common way of subsetting vectors is through logical vectors based on some condition. </p>
-<pre><code>  # set a seed for reproducible random number generation
+A very common way of subsetting vectors by using logical vectors based on some condition. </p>
+<p><pre><code>  # set a seed for reproducible random number generation
   seed(1)
 
   numbers &lt;- rnorm(10, mean=0, sd =10)
   # returns logical vector
   numbers &gt; 10
-  # using the logical vector to subset
-numbers[numbers &gt; 10]
-</code></pre>
 
-<p>Less commonly used, you can also assign names to a vector<br />
+  # using the logical vector to subset
+  numbers[numbers &gt; 10]
+</code></pre><br />
+In the last command, all indices for which the condition &lsquo;number &gt; 10&rsquo; is true will be selected.</p>
+<p>You can also assign names to a vector.<br />
 <pre><code>  names(numbers)
   names(numbers) &lt;- letters[1:length(numbers)]
   numbers[&quot;a&quot;]
@@ -1285,88 +1293,83 @@ You can access elements by name or by brackets. You need to use a double bracket
 
 <h2 id="matrices"><a name="user-content-matrices" href="#matrices" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Matrices</h2>
 <p>When creating a matrix you need to specify the number of columns and rows.</p>
-<p><pre><code>matrix(c(1, 2, 3, 4))
-matrix(1:4, nrow = 2, ncol = 2)
-
+<p><pre><code>  matrix(c(1, 2, 3, 4))
+  matrix(1:4, nrow = 2, ncol = 2)
 
 </code></pre><br />
 <strong>Exercise</strong><br />
 Find the argument to the matrix funciton that will build the matrix so (1 2) is the first row.</p>
-<pre><code>M &lt;- matrix(rnorm(16), ncol= 4, ncol = 4, byrow = TRUE)
+<pre><code>  M &lt;- matrix(rnorm(16), ncol= 4, ncol = 4, byrow = TRUE)
 
 # Operations
-M %*% M
-M*M
-M^2
-solve(M)
+  M %*% M
+  M*M
+  M^2
+  solve(M)
 
-dim(M)
+  dim(M)
 
-# access an element
-M[1,2]
-# access a row
-M[,1]
+  # access an element
+  M[1,2]
+  # access a row
+  M[,1]
 </code></pre>
 
 <p><strong>Quirk</strong> </p>
 <p>Retrieving a column of a matrix returns a vector, not a matrix.<br />
-<pre><code>is.matrix(M[,1])
-
+<pre><code>  is.matrix(M[,1])
+  is.vector(M[,1])
 </code></pre></p>
 <h2 id="data-frames"><a name="user-content-data-frames" href="#data-frames" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Data frames</h2>
 <p>A data frame can be thought of as a list of named vectors (the columns) all of the same length. We&rsquo;ll go over using data frames more in later tutorials so here I&rsquo;m just introducing a few basic operations. </p>
-<pre><code># some vectors of the same length
-abc &lt;- LETTERS[1:3]
-nums &lt;- rpois(3, 10)
-facs &lt;- c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+<pre><code>  # some vectors of the same length
+  abc &lt;- LETTERS[1:3]
+  nums &lt;- rpois(3, 10)
+  facs &lt;- c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
 
-# create a data frame
-df &lt;- data.frame(abc, nums, facs)
+  # create a data frame
+  df &lt;- data.frame(abc, nums, facs)
 
-# add a column 
-df$ints &lt;-  3:5
+  # add a column 
+  df$ints &lt;-  3:5
 
-# summaries of data 
-summary(df)
-head(df)
-names(df)
+  # summaries of data 
+  summary(df)
+  head(df)
+  names(df)
 
-#replace names
-names(df) &lt;- c(&quot;letters&quot;, &quot;numbers&quot;, &quot;factors&quot;, &quot;integers&quot;)
-df
-row.names(df)
+  #replace names
+  names(df) &lt;- c(&quot;letters&quot;, &quot;numbers&quot;, &quot;factors&quot;, &quot;integers&quot;)
+  df
+  row.names(df)
 
-# subsetting
-df[1,2]
+  # subsetting
+  df[1,2]
 
-df[1]
-is.vector(df[1])
-is.vector(df[[1]])
+  df[1]
+  is.vector(df[1])
+  is.vector(df[[1]])
 
-is.list(df)
-is.data.frame(df)
-mean(df[,2])
-sum(df[,2])
+  is.list(df)
+  is.data.frame(df)
+  mean(df[,2])
+  sum(df[,2])
 
-# add a column 
-df$ints &lt;-  3:5
+  # add a column 
+  df$ints &lt;-  3:5
+</code></pre>
 
-*** 
-
-# Simulation exercise : Die tosses
-
-In this exercise we use what you've learned so far to simulate 10, 100 and 1000 roles of a die
-
-Steps:
-
-1. Create a vector that represents the roles of a single die
-2. Use the `sample()` function to make three vectors that simulate 10, 100 and 1000 rolls of the die.
-3. Compare the mean of each simulation to the analytic mean
-4. Plot them next to each other using the `hist()` function.
-
-
-```x
-  seed(1)
+<hr />
+<h1 id="simulation-exercise-die-tosses"><a name="user-content-simulation-exercise-die-tosses" href="#simulation-exercise-die-tosses" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Simulation exercise : Die tosses</h1>
+<p>In this exercise we use what you&rsquo;ve learned so far to simulate 10, 100 and 1000 roles of a die</p>
+<p>Steps:</p>
+<ol>
+<li>Create a vector that represents the roles of a single die</li>
+<li>Use the <code>sample()</code> function to make three vectors that simulate 10, 100 and 1000 rolls of the die.</li>
+<li>Compare the mean of each simulation to the analytic mean</li>
+<li>Plot them next to each other using the <code>hist()</code> function.</li>
+</ol>
+<pre><code class="x">  seed(1)
   die &lt;- 1:6
   # this does not work
   sample1 &lt;- sample(die, 10)
@@ -1375,10 +1378,11 @@ Steps:
 <p>Read function docs or follow examples to enable repeated sampling. </p>
 <p>This is a simple way of generating estimates for a given event. For example, you compute the probability of </p>
 <h3 id="plotting"><a name="user-content-plotting" href="#plotting" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Plotting</h3>
-<p>Base plot with one vector will use the index as the <em>x</em> value and create a simple scatter plot<br />
+<p>Base plot with one vector will use the index as the <em>x</em> value and create a simple scatter plot</p>
 <pre><code>plot(sample1)
 
-</code></pre></p>
+</code></pre>
+
 <p>We can use <code>hist()</code> to plot the three simulations. The <code>par</code> variable holds some graphic parameters for plotting in base R (the default plotting functions). We can create multiple plots by changing the <code>mfrom</code> setting. </p>
 <pre><code>  # save defaults
   oldpar &lt;- par  
@@ -1394,35 +1398,37 @@ Steps:
 
 <h1 id="exercise-2-mixture-of-gaussians-and-ggplot2"><a name="user-content-exercise-2-mixture-of-gaussians-and-ggplot2" href="#exercise-2-mixture-of-gaussians-and-ggplot2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Exercise 2 : Mixture of Gaussians and ggplot2</h1>
 <p>Here we create a simple mixture of gaussians and plot </p>
-<pre><code>n1 &lt;- rnorm(10000, mean = 3, sd = 1.5)
-n2 &lt;- rnorm(10000, mean = -4, sd = 2)
-n3 &lt;- rnorm(10000, mean = 2, sd = 5)
+<pre><code>  n1 &lt;- rnorm(10000, mean = 3, sd = 1.5)
+  n2 &lt;- rnorm(10000, mean = -4, sd = 2)
+  n3 &lt;- rnorm(10000, mean = 2, sd = 5)
 
-hist(c(n1,n2,n3), col = &quot;gray30&quot;, border = &quot;white&quot;)
+  hist(c(n1,n2,n3), col = &quot;gray30&quot;, border = &quot;white&quot;)
 
-p1 &lt;- hist(n1)
-p2 &lt;- hist(n2)
-p3 &lt;- hist(n3)
+  p1 &lt;- hist(n1)
+  p2 &lt;- hist(n2)
+  p3 &lt;- hist(n3)
 
-d1 &lt;- density(rnorm(10000, mean = 3, sd = 1.5))
-d2 &lt;- density(rnorm(10000, mean = -4, sd = 2))
-d3 &lt;- density(rnorm(10000, mean = 2, sd = 5))
+  d1 &lt;- density(rnorm(10000, mean = 3, sd = 1.5))
+  d2 &lt;- density(rnorm(10000, mean = -4, sd = 2))
+  d3 &lt;- density(rnorm(10000, mean = 2, sd = 5))
 
-plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = &quot;&quot;,
-main = &quot;Mixture of Gaussians&quot; )
-plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = &quot;&quot;, add=TRUE) 
-plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab =&quot;&quot;, add=TRUE)  
+  plot( p1, col=rgb(0,0,1,1/8), xlim=c(-20, 20), xlab = &quot;&quot;, 
+        main = &quot;Mixture of Gaussians&quot; )
+  plot( p2, col=rgb(1, 0, 0,1/8), xlim=c(-20,20), xlab = &quot;&quot;, 
+        add=TRUE) 
+  plot( p3, col=rgb(0, .7, 0, 1/8), xlim=c(-20,20), xlab =&quot;&quot;, 
+        add=TRUE)  
 
-# a simple plot function
+  # a simple plot function
 
-add_density &lt;- function(dens, color){
-  par(new = TRUE)
-  plot(dens, col = color, xlim = c(-20, 20), ylab =&quot;&quot;, xlab=&quot;&quot;,main=&quot;&quot;, yaxt = &quot;n&quot;, xaxt= &quot;n&quot;)  
-}
+  add_density &lt;- function(dens, color){
+    par(new = TRUE)
+    plot(dens, col = color, xlim = c(-20, 20), ylab =&quot;&quot;, xlab=&quot;&quot;,main=&quot;&quot;, yaxt = &quot;n&quot;, xaxt= &quot;n&quot;)  
+  }
 
-add_density(d1, &quot;blue&quot;)
-add_density(d2, &quot;red&quot;)
-add_density(d3, &quot;green&quot;)
+  add_density(d1, &quot;blue&quot;)
+  add_density(d2, &quot;red&quot;)
+  add_density(d3, &quot;green&quot;)
 
 
 </code></pre></article></body></html>
