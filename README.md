@@ -2,4 +2,4 @@
 
 Tutorials prepared for informal coding seminars given at San Francisco State.
 
-The pages [version is here](https://nwaff.github.io/Rtutorials)
+The pages [version is here](https://nateaff.github.io/Rtutorials)
